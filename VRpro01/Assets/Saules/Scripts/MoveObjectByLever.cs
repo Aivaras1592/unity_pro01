@@ -14,46 +14,62 @@ public class MoveObjectByLever : MonoBehaviour
     private float startingAngle = Quaternion.Euler(0, 0, 0).eulerAngles.z;
     private bool isGrabbed = false;
     private XRGrabInteractable grabInteractable;
+    private Vector3 topSurfaceNormal;
 
     private void Start()
     {
         grabInteractable = GetComponent<XRGrabInteractable>();
         grabInteractable.selectEntered.AddListener(OnGrab);
         grabInteractable.selectExited.AddListener(OnRelease);
+
+        // Calculate the normal vector of the top surface of the cylinder
+        topSurfaceNormal = cylinder.TransformDirection(Vector3.up);
+        Collider cylinderCollider = cylinder.GetComponent<Collider>();
+        Vector3 topSurfacePoint = cylinderCollider.ClosestPoint(cylinder.transform.position + cylinder.TransformDirection(Vector3.up) * cylinder.localScale.y / 2f);
+        topSurfaceNormal = (topSurfacePoint - cylinder.transform.position).normalized;
     }
 
-    private void Update()
+   private void Update()
+{
+    // Only move the cylinder if the lever is grabbed
+    if (isGrabbed)
     {
-        // Only move the cylinder if the lever is grabbed
-        if (isGrabbed)
+        // Calculate the current angle of the lever relative to the starting angle
+        float currentAngle = lever.transform.localRotation.eulerAngles.z;
+        Debug.Log("Current angle: " + currentAngle);
+
+        if (currentAngle >= startingAngle && currentAngle <= 60)
         {
-            // Calculate the current angle of the lever relative to the starting angle
-            float currentAngle = lever.transform.localRotation.eulerAngles.z;
-            Debug.Log("Current angle: " + currentAngle);
+            // Calculate the velocity based on the current angle
+            float velocity = (currentAngle - startingAngle) * (maxSpeed / 60f) + velocityOffset;
+            Debug.Log("Velocity+: " + velocity);
 
-            if (currentAngle >= startingAngle && currentAngle <= 60)
-            {
-                // Calculate the velocity based on the current angle
-                float velocity = (currentAngle - startingAngle) * (maxSpeed / 60f) + velocityOffset;
-                Debug.Log("Velocity+: " + velocity);
-                // Move the cylinder
-                Vector3 newPosition = cylinder.transform.position;
-                newPosition.z += velocity * Time.deltaTime;
-                cylinder.transform.position = newPosition;
-            }
-            else if (currentAngle >= 300 && currentAngle <= 360)
-            {
-                // Calculate the velocity based on the current angle
-                float velocity = (360 - currentAngle) * (-maxSpeed / 60f) + velocityOffset;
-                Debug.Log("Velocity-: " + velocity);
-                // Move the cylinder
-                Vector3 newPosition = cylinder.transform.position;
-                newPosition.z += velocity * Time.deltaTime;
-                cylinder.transform.position = newPosition;
-            }
+            // Calculate the direction to move the cylinder
+            Vector3 direction = cylinder.up;
+            Debug.DrawLine(cylinder.position, cylinder.position + direction, Color.blue);
 
+            // Move the cylinder
+            Vector3 newPosition = cylinder.transform.position;
+            newPosition += direction * velocity * Time.deltaTime;
+            cylinder.transform.position = newPosition;
+        }
+        else if (currentAngle >= 300 && currentAngle <= 360)
+        {
+            // Calculate the velocity based on the current angle
+            float velocity = (360 - currentAngle) * (-maxSpeed / 60f) + velocityOffset;
+            Debug.Log("Velocity-: " + velocity);
+
+            // Calculate the direction to move the cylinder
+            Vector3 direction = cylinder.up;
+            Debug.DrawLine(cylinder.position, cylinder.position + direction, Color.blue);
+
+            // Move the cylinder
+            Vector3 newPosition = cylinder.transform.position;
+            newPosition += direction * velocity * Time.deltaTime;
+            cylinder.transform.position = newPosition;
         }
     }
+}
 
     private void OnGrab(SelectEnterEventArgs args)
     {
