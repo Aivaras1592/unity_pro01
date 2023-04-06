@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 183735655084391470}
   - component: {fileID: 183735655084391471}
   m_Layer: 8
-  m_Name: Mystery Object
+  m_Name: Mystery Object 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8f1a918bc42c3734cabd5ea0ebef5e59, type: 2}
+  - {fileID: 2100000, guid: b5d48724ff9cfe1428cd1130b09c1749, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
