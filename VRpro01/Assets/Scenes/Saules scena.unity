@@ -380,7 +380,13 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f,
       type: 3}
-  handAnimator: {fileID: 0}
+  handAnimator: {fileID: 66163823}
+--- !u!95 &66163823 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 109434732388006827, guid: 65847589f926b734d9eaed6e25f0046b,
+    type: 3}
+  m_PrefabInstance: {fileID: 66163819}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &160911741
 GameObject:
   m_ObjectHideFlags: 0
@@ -396,6 +402,7 @@ GameObject:
   - component: {fileID: 160911744}
   - component: {fileID: 160911743}
   - component: {fileID: 160911742}
+  - component: {fileID: 160911749}
   m_Layer: 0
   m_Name: Lever
   m_TagString: Untagged
@@ -416,20 +423,20 @@ HingeJoint:
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
-  m_UseSpring: 0
+  m_UseSpring: 1
   m_Spring:
     spring: 0
-    damper: 0
+    damper: 10
     targetPosition: 0
   m_UseMotor: 0
   m_Motor:
     targetVelocity: 0
     force: 0
     freeSpin: 0
-  m_UseLimits: 0
+  m_UseLimits: 1
   m_Limits:
-    min: 0
-    max: 0
+    min: -45
+    max: 45
     bounciness: 0
     bounceMinVelocity: 0.2
     contactDistance: 0
@@ -567,8 +574,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  m_ThrowVelocityScale: 1.5
-  m_ThrowAngularVelocityScale: 1
+  m_ThrowVelocityScale: 0
+  m_ThrowAngularVelocityScale: 0
   m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
   m_AttachPointCompatibilityMode: 0
@@ -670,6 +677,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &160911749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160911741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e844cb5325eadf4ab7105f7ad98054b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lever: {fileID: 160911743}
+  cylinder: {fileID: 951008739}
+  maxSpeed: 2
+  velocityOffset: 0.2
 --- !u!1 &266982152
 GameObject:
   m_ObjectHideFlags: 0
@@ -2208,15 +2231,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 738026724}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -4.099, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1113028351}
   m_Father: {fileID: 0}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!143 &738026728
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2375,20 +2398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcd164a189eeb6948a31946ca3711a3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftTeleportation: {fileID: 0}
   rightTeleportation: {fileID: 708607061}
-  leftActivate:
-    m_UseReference: 0
-    m_Action:
-      m_Name: Left Activate
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 95b15f22-d052-43f0-85f7-710a2355d0e7
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 0}
   rightActivate:
     m_UseReference: 1
     m_Action:
@@ -2402,18 +2412,6 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f,
       type: 3}
-  leftCancel:
-    m_UseReference: 0
-    m_Action:
-      m_Name: Left Cancel
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 11cf3aeb-c28e-4e6b-b773-00ad4a996816
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 0}
   rightCancel:
     m_UseReference: 1
     m_Action:
@@ -2427,8 +2425,6 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f,
       type: 3}
-  leftRay: {fileID: 0}
-  rightRay: {fileID: 0}
 --- !u!1 &798315154
 GameObject:
   m_ObjectHideFlags: 0
@@ -2863,7 +2859,7 @@ GameObject:
   - component: {fileID: 951008737}
   - component: {fileID: 951008736}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: Sonar Icon Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2993,7 +2989,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1139385995}
   - component: {fileID: 1139385994}
-  - component: {fileID: 1139385993}
   - component: {fileID: 1139385992}
   m_Layer: 0
   m_Name: Sonar Camera
@@ -3014,16 +3009,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e83ec2be9ae3f1a42aeef05d075f0e00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 951008739}
   smoothTime: 0
---- !u!81 &1139385993
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1139385991}
-  m_Enabled: 1
 --- !u!20 &1139385994
 Camera:
   m_ObjectHideFlags: 0
@@ -3916,7 +3903,13 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: -1758520528963094988, guid: c348712bda248c246b8c49b3db54643f,
       type: 3}
-  handAnimator: {fileID: 0}
+  handAnimator: {fileID: 1473647161}
+--- !u!95 &1473647161 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5686134208192617028, guid: 1fd3a7c43c8190f4d8c167ebde694364,
+    type: 3}
+  m_PrefabInstance: {fileID: 1473647157}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1568589166
 GameObject:
   m_ObjectHideFlags: 0
