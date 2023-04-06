@@ -9,7 +9,7 @@ public class MoveObjectByLever : MonoBehaviour
     public XRGrabInteractable lever;
     public Transform cylinder;
     public float maxSpeed = 2.0f;
-      public float velocityOffset = 0.2f;
+    public float velocityOffset = 0.2f;
 
     private float startingAngle = Quaternion.Euler(0, 0, 0).eulerAngles.z;
     private bool isGrabbed = false;
@@ -51,6 +51,7 @@ public class MoveObjectByLever : MonoBehaviour
                 newPosition.z += velocity * Time.deltaTime;
                 cylinder.transform.position = newPosition;
             }
+
         }
     }
 
