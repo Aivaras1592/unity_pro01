@@ -38,7 +38,7 @@ public class MoveObjectByLever : MonoBehaviour
         float currentAngle = lever.transform.localRotation.eulerAngles.z;
         Debug.Log("Current angle: " + currentAngle);
 
-        if (currentAngle >= startingAngle && currentAngle <= 60)
+        if (currentAngle >= 10 && currentAngle <= 60)
         {
             // Calculate the velocity based on the current angle
             float velocity = (currentAngle - startingAngle) * (maxSpeed / 60f) + velocityOffset;
@@ -53,7 +53,7 @@ public class MoveObjectByLever : MonoBehaviour
             newPosition += direction * velocity * Time.deltaTime;
             cylinder.transform.position = newPosition;
         }
-        else if (currentAngle >= 300 && currentAngle <= 360)
+        else if (currentAngle >= 300 && currentAngle <= 350)
         {
             // Calculate the velocity based on the current angle
             float velocity = (360 - currentAngle) * (-maxSpeed / 60f) + velocityOffset;
