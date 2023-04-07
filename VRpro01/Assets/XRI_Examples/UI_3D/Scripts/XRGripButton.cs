@@ -28,8 +28,14 @@ using UnityEngine.XR.Interaction.Toolkit;
         [SerializeField]
         [Tooltip("Events to trigger when the button is released")]
         UnityEvent m_OnRelease;
+   
+        [SerializeField]
+        ZoneTrigger zoneTrigger1;
 
-        bool m_Hovered = false;
+        [SerializeField]
+        ZoneTrigger zoneTrigger2;
+
+    bool m_Hovered = false;
         bool m_Selected = false;
         bool m_Toggled = false;
 
@@ -116,7 +122,9 @@ using UnityEngine.XR.Interaction.Toolkit;
             SetButtonHeight(-m_PressDistance);
             m_OnPress.Invoke();
             m_Selected = true;
-        }
+            zoneTrigger1.ButtonPressed();
+            zoneTrigger2.ButtonPressed();
+    }
 
         void EndPress(SelectExitEventArgs args)
         {

@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Zone
+  - Mover
   layers:
   - Default
   - TransparentFX
@@ -16,7 +17,7 @@ TagManager:
   - Interacting
   - Interactable
   - Icon
-  - 
+  - Spawner
   - 
   - 
   - 
